@@ -70,7 +70,7 @@ function init() {
     onSuccess: ({ coords: { latitude: lat, longitude: lng } }) => {
       marker.setPosition({ lat, lng });
       map.panTo({ lat, lng });
-      $info.textContent = `Your current coordinates are: ${lat.toFixed(5)} ${lng.toFixed(5)}`;
+      $info.textContent = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
       $info.classList.remove('error');
     },
     onError: err => {

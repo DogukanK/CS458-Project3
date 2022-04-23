@@ -5,6 +5,8 @@ html {
 }
 
 body {
+    background-image: url('http://i.stack.imgur.com/kx8MT.gif');
+    background-size: cover;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 1rem;
@@ -29,6 +31,7 @@ body {
     height: 500px;
     width: 500px;
     align-items: center;
+    margin-bottom: 60px;
 }
 
 .info {
@@ -42,13 +45,13 @@ body {
 }
 
 .card {
-    background: #fff;
     border-radius: 0.25rem;
-    margin-top: 50px;
+    margin-top: 20px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     width: 100%;
     max-width: 500px;
+    margin-bottom: 60px;
 }  .card:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
@@ -59,9 +62,9 @@ body {
     border-radius: 0.25rem;
     padding: 0.75rem 1.25rem;
     margin-top: 10px;
+    margin-bottom: 30px;
     font-size: 0.875rem;
     font-weight: 700;
-    text-transform: uppercase;
     letter-spacing: 0.1em;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     border: none;
@@ -70,6 +73,7 @@ body {
 .btn-primary {
     background: #007bff;
     color: #fff;
+    position:relative;
 }
 .btn-primary:hover {
     background: #0069d9;
@@ -80,9 +84,42 @@ body {
     margin-top: 10px;
     font-size: 0.875rem;
     font-weight: 700;
-    text-transform: uppercase;
     letter-spacing: 0.1em;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     border: 0.1rem solid #007bff;
     cursor: pointer;
 }
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.white-text {
+    color: #fff;
+}
+

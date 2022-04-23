@@ -1,72 +1,86 @@
-
-
 <!DOCTYPE html>
 
 <html lang="en">
 
-  <head>
-    <link rel="stylesheet" href="styles.css">
-    <meta charset="utf-8">
-    <title>CS458 Project 3</title>
-    <meta name="viewport" content="initial-scale=1, shrink-to-fit=yes">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <style>
-    body {font-family: "Roboto", sans-serif}
-    .mySlides {display: none}
-    </style>
-  </head>
-  <div class="w3-top">
-    <div class="w3-bar w3-black w3-card">
-      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-      <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-      <a href="#findcountry" class="w3-bar-item w3-button w3-padding-large w3-hide-small">FIND COUNTRY</a>
-      <a href="#devicegpscoordinates" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DEVICE GPS COORDINATES</a>
-      <a href="#distancemooncore" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DISTANCE MOON CORE</a>
-      <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
-    </div>
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <title>CS458 Project 3</title>
+  <meta name="viewport" content="initial-scale=1, shrink-to-fit=yes">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <style>
+    body {
+      font-family: "Roboto", sans-serif
+    }
+
+    .mySlides {
+      display: none
+    }
+  </style>
+</head>
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
+      onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    <a href="#findcountry" class="w3-bar-item w3-button w3-padding-large w3-hide-small">FIND COUNTRY</a>
+    <a href="#devicegpscoordinates" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DEVICE GPS
+      COORDINATES</a>
+    <a href="#distancemooncore" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DISTANCE MOON CORE</a>
+    <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i
+        class="fa fa-search"></i></a>
   </div>
-  <div class="w3-content" style="max-width:2000px;margin-top:46px">
+</div>
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
 
-    <!-- FIND COUNTRY -->  
-
-    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="findcountry">
   <body>
     <main class="container">
-      
-      <div id="map" class="map"></div>
-      <div id="country" class="card-body">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Enter coordinates">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">Find Country</button>
-          </div>
-        </div> 
-      <div id="results" class="card">
-        <h2>Results</h2>
-        <hr/>
-        <table>
-            <tr>
-                <th>Current Location:</th>
-                <td><span id="info" class="info"></span></td>
-            </tr>
-            <tr>
-                <th>Country:</th>
-                <td><span id="result_country"></span></td>
-            </tr>
-            <tr>
-                <th>Distance to Geographic North Pole:</th>
-                <td><span id="result_distance_north_pole"></span> km</td>
-            </tr>
-            <tr>
-                <th>Distance to the Moon's core:</th>
-                <td><span id="result_distance_moon_core"></span> km</td>
-            </tr>
-        </table>
-    </div>
 
+      <div id="loc">
+        <hr />
+        <table class="styled-table" width="500px">
+          <thead style="width:100px; border: 1px solid black">
+            <tr>
+              <th style="text-align:center">Your Current Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:center"><span id="info" class="info white-text"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div id="map" class="map"></div>
+
+      <div class="w3-container w3-content w3-center w3-padding-30" style="max-width:800px" id="findcountry">
+        <h2 class="w3-wide white-text">FIND COUNTRY</h2>
+        <div id="country" class="card-body">
+          <div class="input-group mb-3">
+            <input name="myText" type="text" id="myText" class="form-control " placeholder="Enter coordinates">
+            <button class="btn btn-primary" onclick=findCountry(myText.value) type="button">Find Country</button>
+          </div>
+          <div id="results" class="card">
+            <h1 class="white-text">Result</h1>
+            <hr />
+            <table class="styled-table" width="500px">
+              <thead style="width:100px; border: 1px solid black">
+                <tr>
+                  <th style="text-align:center">Country</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align:center"><span id="result_country" class="white-text" name="result_country"></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
     </main>
 
@@ -76,10 +90,67 @@
 
   </body>
 </div>
-<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="devicegpscoordinates">
-  <h2 class="w3-wide">DEVICE GPS COORDINATES</h2>
-  
+
+<div class="w3-container w3-content w3-center w3-padding-30" style="max-width:800px" id="findcountry">
+  <h2 class="w3-wide white-text">FIND DISTANCES TO THE NORTH POLE</h2>
+
+  <body>
+    <main class="container">
+      <div id="distancenorthpole" class="card-body">
+        <div id="results" class="card">
+          <h1 class="white-text">Result</h1>
+          <hr />
+          <table class="styled-table" width="500px" ;>
+            <thead style="width:100px; border: 1px solid black">
+              <tr>
+                <th style="text-align:center"> Distance to the Geographic North Pole</th>
+              </tr>
+
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align:center"><span id="result_northpole" class="white-text"></span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="input-group mb-3">
+            <button class="btn btn-primary" type="button">Find Distance to North Pole</button>
+          </div>
+        </div>
+
+        <div class="w3-container w3-content w3-center w3-padding-30" style="max-width:800px" id="distancemooncore">
+          <h2 class="w3-wide white-text">DISTANCE TO MOON CORE</h2>
+        </div>
+        <div id="results" class="card">
+          <h1 class="white-text">Result</h1>
+          <hr />
+          <table class="styled-table" width="500px">
+            <thead style="width:100px; border: 1px solid black">
+              <tr>
+                <th style="text-align:center">Distance to Moon core</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align:center"><span id="result_mooncore" name="result_mooncore" class="white-text"></span></td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-primary" type="button">Find Distance to Moon Core</button>
+        </div>
+
+    </main>
+
+
+
+  </body>
+
+
+
+
 </div>
+
+
 
 
 </html>

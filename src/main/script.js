@@ -21,6 +21,7 @@ const createMarker = ({ map, position }) => {
   return new google.maps.Marker({ map, position });
 };
 
+
 /**
  * Track the user location.
  * @param {Object} onSuccess
@@ -55,6 +56,34 @@ const getPositionErrorMessage = code => {
   }
 }
 
+
+//calculate the coordinates country
+function findCountry(cor) {
+  //if cor has no comma, error
+  if (cor.indexOf(",") == -1) {
+    alert("Error: Please enter valid coordinates (latitude, longitude)");
+    return;
+  }
+  //console.log(cor);
+  //split cor to lat and lng
+  var lat = cor.split(",")[0];
+  var lon = cor.split(",")[1];
+  //google's reverse geocode api is paid so i used different one
+  fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=9a14581af46544eb9f289e74d579ce10`)
+  .then(response => response.json())
+  .then(result => {
+    if (result.features.length) {
+      console.log(result.features[0].properties.country);
+      //insert the country name to the result div
+      document.getElementById("result_country").textContent = result.features[0].properties.country;
+    } else {
+      console.log("No address found");
+    }
+  });
+
+}
+
+
 /**
  * Initialize the application.
  * Automatically called by the google maps API once it's loaded.
@@ -70,7 +99,7 @@ function init() {
     onSuccess: ({ coords: { latitude: lat, longitude: lng } }) => {
       marker.setPosition({ lat, lng });
       map.panTo({ lat, lng });
-      $info.textContent = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
+      $info.textContent = `Latitude: ${lat.toFixed(5)}, Longitude: ${lng.toFixed(5)}`;
       $info.classList.remove('error');
     },
     onError: err => {

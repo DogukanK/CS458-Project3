@@ -83,7 +83,29 @@ function findCountry(cor) {
 
 }
 
+//find distance to the north pole
+function findDistanceNorthPole() {
+  //first get the device coordinates
+  //console.log(globLat, globLng);
+  
+  //then calculate the distance to the north pole
+  var R = 6371; // Radius of the earth in km
+  var dLat = (globLat - 90) * (Math.PI / 180);  // deg2rad below
+  var dLon = (globLng - 0) * (Math.PI / 180);
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(globLat * (Math.PI / 180)) * Math.cos(90 * (Math.PI / 180)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c; // Distance in km
+  console.log(d);
+  //insert the distance to the north pole to the result div
+  document.getElementById("result_northpole").textContent = d.toFixed(2);
 
+}
+
+
+let globLat = 0;
+let globLng = 0;
 /**
  * Initialize the application.
  * Automatically called by the google maps API once it's loaded.
@@ -99,6 +121,8 @@ function init() {
     onSuccess: ({ coords: { latitude: lat, longitude: lng } }) => {
       marker.setPosition({ lat, lng });
       map.panTo({ lat, lng });
+      globLat = lat;
+      globLng = lng;
       $info.textContent = `Latitude: ${lat.toFixed(5)}, Longitude: ${lng.toFixed(5)}`;
       $info.classList.remove('error');
     },

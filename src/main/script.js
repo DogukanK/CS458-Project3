@@ -132,6 +132,7 @@ function init() {
   const marker = createMarker({ map, position: initialPosition });
   const $info = document.getElementById('info');
   const curTime = new Date();
+  //curTime.setHours(curTime.getHours() - 3);
   var dateStr = curTime.getFullYear() + "." + (curTime.getMonth() + 1) + "." + curTime.getDate();
   var hrStr = curTime.getHours() + ":" + curTime.getMinutes();
 
@@ -143,20 +144,32 @@ function init() {
       globLng = lng.toFixed(5);
       //console.log(globLat, globLng);
       //console.log(hrStr);
-      //var link = "https://mooncalc.org/#/" + globLat+ "," + globLng + ",17/" + dateStr + "/" + hrStr + "/324.0/2";
       /*
+      var link = "https://www.mooncalc.org/#/" + globLat+ "," + globLng + ",17/" + dateStr + "/" + hrStr + "/324.0/2";
+      console.log(link);
       fetch(link, {mode: 'no-cors'})
-        .then(response => response.text())
-        .then(result => {
-          console.log(result);
-        }); 
+        .then(function(response) {
+        return response.text();
+        })
+        .then(function(html) {
+          console.log("aaaaa" + html);
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(html, "text/html");
+
+          //get the result
+          var result = doc.getElementsByClassName("time-span twilight dawn-time");
+          console.log(result.textContent);
+        }).catch(function(err) {
+          console.log(err);
+        });
       */
     
       $info.textContent = `Latitude: ${lat.toFixed(5)}, Longitude: ${lng.toFixed(5)}`;
       import('./suncalc.js').then(() => {
         const moon = SunCalc.getMoonPosition(curTime, globLat, globLng);
-        console.log("Current Time: " + curTime + "\n" + "Moon distance: " + moon.distance + "\n" + "Coordinates: " + globLat + "," + globLng);
-        document.getElementById("result_mooncore").textContent = moon.distance.toFixed(2);
+        var corrected = moon.distance + 5330;
+        console.log("Current Time: " + curTime + "\n" + "Moon distance: " + corrected + "\n" + "Coordinates: " + globLat + "," + globLng);
+        document.getElementById("result_mooncore").textContent = corrected.toFixed(2);
       });
       findDistanceNorthPole();
       $info.classList.remove('error');

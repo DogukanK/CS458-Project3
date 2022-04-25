@@ -41,6 +41,15 @@ function findCountry(cor) {
     alert("Error: Please enter valid coordinates (latitude, longitude)");
     return;
   }
+  //if lattitude or longitude is not a number, error
+  if ( isNaN(cor.split(",")[0]) || isNaN(cor.split(",")[1])) {
+    alert("Error: Please enter valid coordinates (latitude, longitude)");
+    return;
+  }
+  if ( (cor.split(",")[0] < -90) || (cor.split(",")[0] > 90) || (cor.split(",")[1] < -180) || (cor.split(",")[1] > 180) ) {
+    alert("Error: Invalid range");
+    return;
+  }
   //console.log(cor);
   //split cor to lat and lng
   var lat = cor.split(",")[0];

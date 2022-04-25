@@ -93,8 +93,18 @@ function findDistanceNorthPole() {
 //find distance to the moon core
 function findDistanceMoonCore(mooncor) {
   //if mooncor has no comma, error
-  if (cor.indexOf(",") == -1) {
+  //if cor has no comma, error
+  if (mooncor.indexOf(",") == -1) {
     alert("Error: Please enter valid coordinates (latitude, longitude)");
+    return;
+  }
+  //if lattitude or longitude is not a number, error
+  if ( isNaN(mooncor.split(",")[0]) || isNaN(mooncor.split(",")[1])) {
+    alert("Error: Please enter valid coordinates (latitude, longitude)");
+    return;
+  }
+  if ( (mooncor.split(",")[0] < -90) || (mooncor.split(",")[0] > 90) || (mooncor.split(",")[1] < -180) || (mooncor.split(",")[1] > 180) ) {
+    alert("Error: Invalid range");
     return;
   }
   //first get the input coordinates then split them

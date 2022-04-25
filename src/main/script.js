@@ -83,11 +83,16 @@ function findDistanceNorthPole() {
 
 //find distance to the moon core
 function findDistanceMoonCore(mooncor) {
+  //if mooncor has no comma, error
+  if (cor.indexOf(",") == -1) {
+    alert("Error: Please enter valid coordinates (latitude, longitude)");
+    return;
+  }
   //first get the input coordinates then split them
   var lat = mooncor.split(",")[0];
   var lon = mooncor.split(",")[1];
   console.log(mooncor, lat, lon);
-
+  //then calculate the distance to the moon core
   import('./suncalc.js').then(() => {
     const moon = SunCalc.getMoonPosition(new Date(), lat, lon);
     console.log(moon);

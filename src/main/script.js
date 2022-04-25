@@ -70,16 +70,16 @@ function findCountry(cor) {
   var lon = cor.split(",")[1];
   //google's reverse geocode api is paid so i used different one
   fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=9a14581af46544eb9f289e74d579ce10`)
-  .then(response => response.json())
-  .then(result => {
-    if (result.features.length) {
-      console.log(result.features[0].properties.country);
-      //insert the country name to the result div
-      document.getElementById("result_country").textContent = result.features[0].properties.country;
-    } else {
-      console.log("No address found");
-    }
-  });
+    .then(response => response.json())
+    .then(result => {
+      if (result.features.length) {
+        console.log(result.features[0].properties.country);
+        //insert the country name to the result div
+        document.getElementById("result_country").textContent = result.features[0].properties.country;
+      } else {
+        console.log("No address found");
+      }
+    });
 
 }
 
@@ -87,7 +87,7 @@ function findCountry(cor) {
 function findDistanceNorthPole() {
   //first get the device coordinates
   //console.log(globLat, globLng);
-  
+
   //then calculate the distance to the north pole
   var R = 6371; // Radius of the earth in km
   var dLat = (globLat - 90) * (Math.PI / 180);  // deg2rad below
@@ -101,6 +101,21 @@ function findDistanceNorthPole() {
   //insert the distance to the north pole to the result div
   document.getElementById("result_northpole").textContent = d.toFixed(2);
 
+}
+
+
+//find distance to the moon core
+function findDistanceMoonCore(mooncor) {
+  //first get the input coordinates then split them
+  var lat = mooncor.split(",")[0];
+  var lon = mooncor.split(",")[1];
+  console.log(mooncor, lat, lon);
+
+  import('./suncalc.js').then(() => {
+    const moon = SunCalc.getMoonPosition(new Date(), lat, lon);
+    console.log(moon);
+    document.getElementById("result_mooncore").textContent = moon.distance.toFixed(2);
+  });
 }
 
 
@@ -123,7 +138,14 @@ function init() {
       map.panTo({ lat, lng });
       globLat = lat;
       globLng = lng;
+      //console.log(lat, lng);
       $info.textContent = `Latitude: ${lat.toFixed(5)}, Longitude: ${lng.toFixed(5)}`;
+      import('./suncalc.js').then(() => {
+        const moon = SunCalc.getMoonPosition(new Date(), globLat, globLng);
+        console.log(moon);
+        document.getElementById("result_mooncore").textContent = moon.distance.toFixed(2);
+      });
+      findDistanceNorthPole();
       $info.classList.remove('error');
     },
     onError: err => {

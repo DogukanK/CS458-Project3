@@ -21,25 +21,32 @@
     }
   </style>
 </head>
+
 <div class="w3-top">
   <div class="w3-bar w3-black w3-card">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
-      onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-    <a href="#findcountry" class="w3-bar-item w3-button w3-padding-large w3-hide-small">FIND COUNTRY</a>
-    <a href="#devicegpscoordinates" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DEVICE GPS
+      title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#loc" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DEVICE GPS
       COORDINATES</a>
-    <a href="#distancemooncore" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DISTANCE MOON CORE</a>
+    <a href="#findcountry" class="w3-bar-item w3-button w3-padding-large w3-hide-small">FIND COUNTRY BY
+      COORDINATES</a>
+    <a href="#findnp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">FIND DISTANCE TO THE NORTH POLE</a>
+    <a href="#distancemooncore" class="w3-bar-item w3-button w3-padding-large w3-hide-small">FIND DISTANCE TO THE MOON
+      CORE</a>
     <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i
         class="fa fa-search"></i></a>
   </div>
 </div>
+
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
   <body>
     <main class="container">
 
       <div id="loc">
+        <div class="w3-container w3-content w3-center w3-padding-30" style="max-width:800px">
+          <h2 class="w3-wide white-text">YOUR CURRENT LOCATION</h2>
+        </div>
         <hr />
         <table class="styled-table" width="500px">
           <thead style="width:100px; border: 1px solid black">
@@ -55,102 +62,91 @@
         </table>
       </div>
 
-
       <div id="map" class="map"></div>
 
-      <div class="w3-container w3-content w3-center w3-padding-30" style="max-width:800px" id="findcountry">
-        <h2 class="w3-wide white-text">FIND COUNTRY</h2>
-        <div id="country" class="card-body">
-          <div class="input-group mb-3">
-            <input name="myText" type="text" id="myText" class="form-control " placeholder="Enter coordinates">
-            <button class="btn btn-primary" onclick=findCountry(myText.value) type="button">Find Country</button>
-          </div>
-          <div id="results" class="card">
-            <h4 class="white-text">Result</h4>
-            <hr />
-            <table class="styled-table" width="500px">
-              <thead style="width:100px; border: 1px solid black">
-                <tr>
-                  <th style="text-align:center">Country</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="text-align:center"><span id="result_country" class="white-text" name="result_country"></span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-    </main>
-
-    <script src="script.js"></script>
-    <script async="false" src="https://maps.googleapis.com/maps/api/js?key=&callback=init"></script>
-
-
-  </body>
-</div>
-
-<div class="w3-container w3-content w3-center w3-padding-30" style="max-width:800px" id="devicegpscoordinates">
-  <h2 class="w3-wide white-text">FIND DISTANCES TO THE NORTH POLE</h2>
-
-  <body>
-    <main class="container">
-      <div id="distancenorthpole" class="card-body">
-        <div id="results" class="card">
-          <h4 class="white-text">Result</h4>
-          <hr />
-          <table class="styled-table" width="500px" ;>
-            <thead style="width:100px; border: 1px solid black">
-              <tr>
-                <th style="text-align:center"> Distance to the Geographic North Pole (km)</th>
-              </tr>
-
-            </thead>
-            <tbody>
-              <tr>
-                <td style="text-align:center"><span id="result_northpole" class="white-text"></span></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="input-group mb-3">
-            <button class="btn btn-primary" onclick=findDistanceNorthPole() type="button">Find Distance to North Pole</button>
-          </div>
+      <div id="findcountry">
+        <h2 class="w3-wide white-text">FIND COUNTRY BY COORDINATES</h2>
+      </div>
+      <div id="results" class="card w3-center">
+        <div class="input-group mb-3">
+          <input name="myText" type="text" id="myText" class="form-control " placeholder="Enter coordinates">
+          <button class="btn btn-primary" onclick=findCountry(myText.value) type="button">Find Country</button>
         </div>
-
-        <div class="w3-container w3-content w3-center w3-padding-30" style="max-width:800px" id="distancemooncore">
-          <h2 class="w3-wide white-text">DISTANCE TO MOON CORE</h2>
-        </div>
-        <div id="results" class="card">
+        <div>
           <h4 class="white-text">Result</h4>
           <hr />
           <table class="styled-table" width="500px">
             <thead style="width:100px; border: 1px solid black">
               <tr>
-                <th style="text-align:center">Distance to Moon core</th>
+                <th style="text-align:center">Country</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style="text-align:center"><span id="result_mooncore" name="result_mooncore" class="white-text"></span></td>
+                <td style="text-align:center"><span id="result_country" class="white-text" name="result_country"></span>
+                </td>
               </tr>
             </tbody>
           </table>
-          <button class="btn btn-primary" type="button">Find Distance to Moon Core</button>
         </div>
 
-    </main>
+      </div>
 
+      <div id="findnp">
+        <h2 class="w3-wide white-text">FIND DISTANCE TO THE NORTH POLE</h2>
+      </div>
+      <div id="results" class="card w3-center">
+        <h4 class="white-text">Result</h4>
+        <hr />
+        <table class="styled-table" width="500px" ;>
+          <thead style="width:100px; border: 1px solid black">
+            <tr>
+              <th style="text-align:center"> Distance to the Geographic North Pole (km)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:center"><span id="result_northpole" class="white-text"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-
-  </body>
-
-
-
-
+      <div id="distancemooncore">
+        <h2 class="w3-wide white-text">FIND DISTANCE TO THE MOON CORE</h2>
+      </div>
+      <div id="results" class="card w3-center">
+        <div class="input-group mb-3">
+          <input name="myText" type="text" id="mooncor" class="form-control " placeholder="Enter coordinates">
+          <button class="btn btn-primary" onclick=findDistanceMoonCore(mooncor.value) type="button">Find
+            Distance to
+            Moon's Core</button>
+        </div>
+        <h4 class="white-text">Result</h4>
+        <hr />
+        <table class="styled-table" width="500px">
+          <thead style="width:100px; border: 1px solid black">
+            <tr>
+              <th style="text-align:center">Distance to Moon core (km)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:center"><span id="result_mooncore" name="result_mooncore" class="white-text"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 </div>
 
+</main>
+
+<script src="script.js"></script>
+<script async="false" src="https://maps.googleapis.com/maps/api/js?key=&callback=init"></script>
 
 
+</body>
+</div>
 
 </html>

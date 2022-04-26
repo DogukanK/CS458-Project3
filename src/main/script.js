@@ -114,7 +114,7 @@ function findDistanceMoonCore(mooncor) {
   import('./suncalc.js').then(() => {
     const moon = SunCalc.getMoonPosition(new Date(), lat, lon);
     //console.log(moon);
-    document.getElementById("result_mooncore").textContent = moon.distance.toFixed(2);
+    document.getElementById("result_mooncore").textContent = (moon.distance + 5330).toFixed(2);
   });
 }
 
